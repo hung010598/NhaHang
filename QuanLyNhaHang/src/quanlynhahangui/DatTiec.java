@@ -103,7 +103,8 @@ public class DatTiec extends JPanel{
 		JLabel lblTieuDe = new JLabel();
 		lblTieuDe.setText("Order");
 		lblTieuDe.setBackground(Color.LIGHT_GRAY);
-		Font fontTieuDe = new Font("arial",Font.PLAIN,20);
+		lblTieuDe.setForeground(Color.BLUE);
+		Font fontTieuDe = new Font("arial",Font.BOLD,23);
 		lblTieuDe.setFont(fontTieuDe);
 		pnTieuDe.add(lblTieuDe);
 		pnTop.add(pnTieuDe,BorderLayout.NORTH);
@@ -242,6 +243,9 @@ public class DatTiec extends JPanel{
 												* Integer.parseInt(txtSoLuong
 														.getText()));
 								int i2 = prepe.executeUpdate();
+								if (i2>0) {
+									JOptionPane.showMessageDialog(null,"Gọi món thành công.");
+								}
 							} catch (Exception ex) {
 
 								m--;// neu khong them duoc thi trong chi tiết
@@ -267,6 +271,9 @@ public class DatTiec extends JPanel{
 								aa.setString(4, result.getString(1));
 
 								int i = aa.executeUpdate();
+								if (i>0) {
+									JOptionPane.showMessageDialog(null,"Gọi món thành công.");
+								}
 							} catch (Exception ex) {
 								ex.printStackTrace();
 							}
@@ -314,6 +321,9 @@ public class DatTiec extends JPanel{
 											* Integer.parseInt(txtSoLuong
 													.getText()));
 							int i2 = prepe.executeUpdate();
+							if (i2>0) {
+								JOptionPane.showMessageDialog(null, "Gọi món thành công");
+							}
 			
 						} catch (Exception ex) {
 

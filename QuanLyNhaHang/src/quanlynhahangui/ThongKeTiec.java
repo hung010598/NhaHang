@@ -170,7 +170,7 @@ btnXoa.addActionListener(new ActionListener() {
 
 			dtm1.setRowCount(0);
 
-			String Sql = "select SanPham.TenSP, Soluong,DonGia,DVT, DonGia*Soluong from SanPham,HoaDonTiec,ChiTietHoaDonTiec where SanPham.MaSP=ChiTietHoaDonTiec.MaSP and HoaDonTiec.MaHD=ChiTietHoaDonTiec.MaHD and HoaDonTiec.MaHD=?";;
+			String Sql = "select SanPham.TenSP, Soluong,DonGia,DVT, DonGia*Soluong from SanPham,HoaDonTiec,ChiTietHoaDonTiec where SanPham.MaSP=ChiTietHoaDonTiec.MaSP and HoaDonTiec.MaHD=ChiTietHoaDonTiec.MaHD and HoaDonTiec.MaHD=?";
 			PreparedStatement prepare = conn.prepareStatement(Sql);
 			prepare.setString(1, maHD);
 			ResultSet result = prepare.executeQuery();

@@ -242,6 +242,9 @@ public class Order extends JPanel {
 												* Integer.parseInt(txtSoLuong
 														.getText()));
 								int i2 = prepe.executeUpdate();
+								if (i2>0) {
+									JOptionPane.showMessageDialog(null,"Gọi món thành công.");
+								}
 							} catch (Exception ex) {
 
 								m--;// neu khong them duoc thi trong chi tiết
@@ -267,6 +270,9 @@ public class Order extends JPanel {
 								aa.setString(4, result.getString(1));
 
 								int i = aa.executeUpdate();
+								if (i>0) {
+									JOptionPane.showMessageDialog(null,"Gọi món thành công.");
+								}
 							} catch (Exception ex) {
 								ex.printStackTrace();
 							}
@@ -328,6 +334,9 @@ public class Order extends JPanel {
 											* Integer.parseInt(txtSoLuong
 													.getText()));
 							int i2 = prepe.executeUpdate();
+							if (i2>0) {
+								JOptionPane.showMessageDialog(null,"Gọi món thành công.");
+							}
 
 						} catch (Exception ex) {
 
@@ -382,11 +391,11 @@ public class Order extends JPanel {
 			switch (ban.getStatus()) {
 			case 0:// Bàn chưa có người dùng
 				btn.setBackground(Color.CYAN);
-				btn.setIcon(new ImageIcon("img/n.jpg"));
+				btn.setIcon(new ImageIcon("src/IMG/n.jpg"));
 				break;
 			default:// Bàn đã có người dùng
-				btn.setIcon(new ImageIcon("img/u.jpg"));
-				btn.setBackground(Color.RED);
+				btn.setIcon(new ImageIcon("src/IMG/u.jpg"));
+				btn.setBackground(Color.GREEN);
 				break;
 			}
 			pnLeftofBot.add(pn);
@@ -395,16 +404,6 @@ public class Order extends JPanel {
 
 				public void actionPerformed(ActionEvent e) {
 					LayMaHD();
-					switch (ban.getStatus()) {
-					case 0:// Bàn chưa có người dùng
-						btn.setBackground(Color.CYAN);
-						btn.setIcon(new ImageIcon("img/n.jpg"));
-						break;
-					default:// Bàn đã có người dùng
-						btn.setIcon(new ImageIcon("img/u.jpg"));
-						btn.setBackground(Color.RED);
-						break;
-					}
 					S = 0.0;// mục thanh toán
 
 					//txtMaHD.setText("");// mục thanh toán
@@ -442,14 +441,14 @@ public class Order extends JPanel {
 																// icon button
 																// theo mã
 					{
-						btn.setIcon(new ImageIcon("img/u.jpg"));
-						btn.setBackground(Color.RED);
+						btn.setIcon(new ImageIcon(getClass().getResource("/IMG/u.jpg")));
+						btn.setBackground(Color.GREEN);
 						Status = 0;
 						temp = "";
 					}
 					if (Status1 == 0 && ba.getMaBan() == temp) {
 						btn.setBackground(Color.CYAN);
-						btn.setIcon(new ImageIcon("img/n.jpg"));
+						btn.setIcon(new ImageIcon(getClass().getResource("/IMG/n.jpg")));
 						Status1 = 1;
 						temp = "";
 					}

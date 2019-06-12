@@ -237,23 +237,13 @@ public class QuanLyBanAn extends JPanel {
 			pn.add(p);
 			final JButton btn = new JButton();
 			btn.setPreferredSize(new Dimension(75, 75));
-			btn.setIcon(new ImageIcon("img/n.jpg"));
+			btn.setIcon(new ImageIcon(getClass().getResource("/IMG/n.jpg")));
+			btn.setBackground(Color.CYAN);
 			JLabel lbl = new JLabel(ban.getTenBan());
 			lbl.setAlignmentX(CENTER_ALIGNMENT);
 			p.add(btn);
 			pn.add(lbl);
 			ba = ban;
-
-			switch (ban.getStatus()) {
-			case 0:// Bàn chưa có người dùng
-				btn.setBackground(Color.CYAN);
-				btn.setIcon(new ImageIcon("img/n.jpg"));
-				break;
-			default:// Bàn đã có người dùng
-				btn.setIcon(new ImageIcon("img/u.jpg"));
-				btn.setBackground(Color.RED);
-				break;
-			}
 			pnBottom.add(pn);
 			btn.addActionListener(new ActionListener() {
 				

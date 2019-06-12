@@ -14,7 +14,9 @@ import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Vector;
 
 import javax.swing.BorderFactory;
@@ -36,6 +38,8 @@ import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableModel;
 
+import com.toedter.calendar.JDateChooser;
+
 import quanlynhahang.model.KhachHang;
 import quanlynhahang.model.KhachHangService;
 import quanlynhahang.model.NhanVien;
@@ -56,6 +60,9 @@ public class QuanLyKhachHang extends JPanel {
 	JFileChooser chooser=new JFileChooser();
 	File selectedFile;
 	JLabel lblImg;
+	SimpleDateFormat datefm=new SimpleDateFormat("dd/MM/yyy");
+	String theDate="";
+	JDateChooser chooser2;
 	JComboBox cboChucVu;
 	public QuanLyKhachHang() {
 
@@ -168,11 +175,11 @@ public class QuanLyKhachHang extends JPanel {
 		JPanel pnNgay = new JPanel();
 		pnNgay.setLayout(new FlowLayout(FlowLayout.LEFT));
 		pnCenterOfGrid.add(pnNgay);
-		JLabel lblNgay = new JLabel("Ngày ĐĂng Ký:");
+		JLabel lblNgay = new JLabel("Ngày Đăng Ký:");
 		// lblNgay.setForeground(Color.BLUE);
-		txtNgay = new JTextField(20);
+		chooser2=new JDateChooser();
 		pnNgay.add(lblNgay);
-		pnNgay.add(txtNgay);
+		pnNgay.add(chooser2);
 
 		/*JPanel pnChuc = new JPanel();
 		pnChuc.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -296,7 +303,15 @@ public class QuanLyKhachHang extends JPanel {
 				}
 				txtDiaChi.setText(kh.getDiaChi());
 				txtSDT.setText(kh.getSDT());
-				txtNgay.setText(kh.getNgayDK());
+				String strDate=kh.getNgayDK();
+				Date date = null;
+				try {
+					date = new SimpleDateFormat("dd/MM/yyyy").parse(strDate);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				chooser2.setDate(date);
 			}
 		});
 		btnTaoMoi.addActionListener(new ActionListener() {
@@ -308,7 +323,7 @@ public class QuanLyKhachHang extends JPanel {
 
 				txtDiaChi.setText("");
 				txtSDT.setText("");
-				txtNgay.setText("");
+	
 				HienThiDanhSachKhachHang();
 			}
 		});
@@ -327,7 +342,8 @@ public class QuanLyKhachHang extends JPanel {
 					}
 					kh.setDiaChi(txtDiaChi.getText());
 					kh.setSDT(txtSDT.getText());
-					kh.setNgayDK(txtNgay.getText());
+					theDate=datefm.format(chooser2.getDate());
+					kh.setNgayDK(theDate);
 					KhachHangService khSV = new KhachHangService();
 					if (khSV.ThemKhachHang(kh) > 0) {
 						JOptionPane.showMessageDialog(null, "Đã thêm mới");
@@ -385,9 +401,10 @@ public class QuanLyKhachHang extends JPanel {
 						prepare.setString(2, gt);
 						prepare.setString(3, txtDiaChi.getText());
 						prepare.setString(4, txtSDT.getText());
-						prepare.setString(5, txtNgay.getText());
+						theDate=datefm.format(chooser2.getDate());
+						prepare.setString(5, theDate);
 				
-						
+						prepare.setString(6, kh.getMaKH());
 						int i = prepare.executeUpdate();
 						if (i > 0) {
 							JOptionPane.showMessageDialog(null,

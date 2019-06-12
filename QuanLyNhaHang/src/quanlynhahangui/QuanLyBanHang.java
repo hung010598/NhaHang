@@ -93,7 +93,7 @@ public class QuanLyBanHang extends JPanel {
 	String NgayHD = "";
 	int ma = 0;
 	SimpleDateFormat spf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-
+	String maKH;
 	JComboBox<DanhMucBan> cboLoaiBan;
 	Vector<DanhMucBan> dsDMB;
 
@@ -154,7 +154,7 @@ public class QuanLyBanHang extends JPanel {
 						T = S * 9 / 10;
 						txtTong.setText(T.toString());
 						ma = 1;
-
+						maKH=txtGiam.getText();
 					} else {
 
 						pnTienGiam.removeAll();
@@ -179,7 +179,7 @@ public class QuanLyBanHang extends JPanel {
 					NgayHD = spf.format(t = ca.getTime());
 
 					try {
-						String sqll = "Update HoaDon set HoaDon.status1=1,NgayHD=?,MaKH=?,ThanhTien=?,MaNV=? where HoaDon.MaHD=?";// status=1
+						String sqll = "Update HoaDon set HoaDon.status1=1,NgayHD=?,MaKH=?,ThanhTien=? where HoaDon.MaHD=?";// status=1
 																																	// //
 																																	// toán
 						PreparedStatement ppp = conn.prepareStatement(sqll);
@@ -189,8 +189,7 @@ public class QuanLyBanHang extends JPanel {
 						else
 							ppp.setString(2, null);
 						ppp.setFloat(3, Float.parseFloat(txtTong.getText()));
-						ppp.setString(4, nv.getMaNV());
-						ppp.setString(5, txtMaHD.getText());
+						ppp.setString(4, txtMaHD.getText());
 						int i = ppp.executeUpdate();
 						if (i > 0) {
 
@@ -210,7 +209,7 @@ public class QuanLyBanHang extends JPanel {
 							Status1 = 0;
 							temp = ba.getMaBan();
 							thanhtoantemp = 1;// mục in hóa đơn(đã thanh toán)
-							ba.setStatus(Status);
+							
 
 						} else {
 							JOptionPane.showMessageDialog(null,
@@ -255,7 +254,8 @@ public class QuanLyBanHang extends JPanel {
 						}
 
 					}
-					HoaDon U = new HoaDon("Phiếu thanh toán", ba, NgayHD, maHD);
+	
+					HoaDon U = new HoaDon("Phiếu thanh toán", ba, NgayHD, maHD,maKH);
 					U.showWindow();
 
 				} catch (Exception ex) {
@@ -272,8 +272,8 @@ public class QuanLyBanHang extends JPanel {
 		 * method stub ChiTietHoaDon ui=new ChiTietHoaDon("Chi tiết hóa đơn");
 		 * ui.showWindow(); } });
 		 */
-		cboLoaiBan.addActionListener(new ActionListener() {
-
+cboLoaiBan.addActionListener(new ActionListener() {
+			
 			public void actionPerformed(ActionEvent e) {
 				// TODO Auto-generated method stub
 				if (cboLoaiBan.getSelectedIndex() == -1)
@@ -286,9 +286,10 @@ public class QuanLyBanHang extends JPanel {
 				pnLeftofBot.repaint();
 				pnLeftofBot.revalidate();
 			}
-		});
 
-	}
+});
+
+}
 
 	private void HienThiDanhSachNV() {
 		// TODO Auto-generated method stub
@@ -311,7 +312,7 @@ public class QuanLyBanHang extends JPanel {
 			pn.add(p);
 			final JButton btn = new JButton();
 			btn.setPreferredSize(new Dimension(75, 75));
-			btn.setIcon(new ImageIcon("img/n.jpg"));
+			btn.setIcon(new ImageIcon("src/IMG/n.jpg"));
 			JLabel lbl = new JLabel(ban.getTenBan());
 			lbl.setAlignmentX(CENTER_ALIGNMENT);
 			p.add(btn);
@@ -321,10 +322,10 @@ public class QuanLyBanHang extends JPanel {
 			switch (ban.getStatus()) {
 			case 0:// Bàn chưa có người dùng
 				btn.setBackground(Color.CYAN);
-				btn.setIcon(new ImageIcon("img/n.jpg"));
+				btn.setIcon(new ImageIcon("src/IMG/n.jpg"));
 				break;
 			default:// Bàn đã có người dùng
-				btn.setIcon(new ImageIcon("img/u.jpg"));
+				btn.setIcon(new ImageIcon("src/IMG/u.jpg"));
 				btn.setBackground(Color.GREEN);
 				break;
 			}
@@ -375,14 +376,16 @@ public class QuanLyBanHang extends JPanel {
 																// icon button
 																// theo mã
 					{
-						btn.setIcon(new ImageIcon("img/u.jpg"));
+						btn.setIcon(new ImageIcon(getClass().getResource(
+								"/IMG/u.jpg")));
 						btn.setBackground(Color.GREEN);
 						Status = 0;
 						temp = "";
 					}
 					if (Status1 == 0 && ba.getMaBan() == temp) {
 						btn.setBackground(Color.CYAN);
-						btn.setIcon(new ImageIcon("img/n.jpg"));
+						btn.setIcon(new ImageIcon(getClass().getResource(
+								"/IMG/n.jpg")));
 						Status1 = 1;
 						temp = "";
 					}
@@ -599,7 +602,7 @@ public class QuanLyBanHang extends JPanel {
 		pnThanhToan.setLayout(new FlowLayout());
 
 		btnIn = new JButton();
-		btnIn.setIcon(new ImageIcon("img/412.png"));
+		btnIn.setIcon(new ImageIcon("src/IMG/412.png"));
 		btnThanhToan = new JButton("Thanh toán");
 		btnThanhToan.setForeground(Color.BLUE);
 		btnThanhToan.setPreferredSize(new Dimension(100, 35));

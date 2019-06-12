@@ -131,7 +131,7 @@ public class DangNhap extends JFrame {
 		JLabel lblDangnhap = new JLabel();
 		pnDangNhap.setBackground(Color.WHITE);
 		lblDangnhap.setForeground(Color.BLACK);
-		lblDangnhap.setIcon(new ImageIcon("img/account.png"));
+		lblDangnhap.setIcon(new ImageIcon(getClass().getResource("/IMG/account.png")));
 		Font font = new Font("arial", Font.BOLD, 20);
 		lblDangnhap.setFont(font);
 		pnDangNhap.add(lblDangnhap);

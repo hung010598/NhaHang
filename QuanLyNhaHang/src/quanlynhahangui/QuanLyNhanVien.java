@@ -175,7 +175,7 @@ public class QuanLyNhanVien extends JPanel {
 		txtTim = new JTextField(17);
 		//txtTim.setPreferredSize(new Dimension(150, 30));
 		btnTim = new JButton("Tìm Theo Tên");
-		btnTim.setIcon(new ImageIcon("img/13.png"));
+		btnTim.setIcon(new ImageIcon(getClass().getResource("/IMG/13.png")));
 		// btnTim.setForeground(Color.BLUE);
 		pnTim.add(txtTim);
 		pnTim.add(btnTim);
@@ -358,6 +358,7 @@ public class QuanLyNhanVien extends JPanel {
 				txtSDT.setText("");
 				//txtNgay.setText("");
 				//txtChucvu.setText("");
+				txtAnh.setText("");
 				HienThiDanhSachNhanVien(dsNV);
 			}
 		});

@@ -432,8 +432,11 @@ public class QuanLyMonAn extends JPanel {
 		pnLeft.setLayout(new BoxLayout(pnLeft, BoxLayout.Y_AXIS));
 		pnThongTin.add(pnLeft);
 		
+		JPanel pnAnhm=new JPanel();
+		pnAnhm.setLayout(new FlowLayout());
 		lblAnh=new JLabel();
-		pnThongTin.add(lblAnh);
+		pnAnhm.add(lblAnh);
+		pnThongTin.add(pnAnhm);
 		JPanel pnMa = new JPanel();
 		pnMa.setLayout(new FlowLayout(FlowLayout.LEFT));
 		pnLeft.add(pnMa);
@@ -489,16 +492,16 @@ public class QuanLyMonAn extends JPanel {
 		pnBottomOfRightofBottom.add(pnBtn);
 
 		btnThem = new JButton("Thêm");
-		btnThem.setIcon(new ImageIcon("img/11.png"));
+		btnThem.setIcon(new ImageIcon(getClass().getResource("/IMG/11.png")));
 		btnXoa = new JButton("Xóa");
-		btnXoa.setIcon(new ImageIcon("img/xoa.png"));
+		btnXoa.setIcon(new ImageIcon(getClass().getResource("/IMG/xoa.png")));
 		btnTim = new JButton("Tìm");
-		btnTim.setIcon(new ImageIcon("img/13.png"));
+		btnTim.setIcon(new ImageIcon(getClass().getResource("/IMG/13.png")));
 		btnUpdate = new JButton("Sửa");
-		btnUpdate.setIcon(new ImageIcon("img/sua.png"));
-		btnThem1.setIcon(new ImageIcon("img/11.png"));
-		btnXoa1.setIcon(new ImageIcon("img/xoa.png"));
-		btnSua1.setIcon(new ImageIcon("img/sua.png"));
+		btnUpdate.setIcon(new ImageIcon(getClass().getResource("/IMG/sua.png")));
+		btnThem1.setIcon(new ImageIcon(getClass().getResource("/IMG/11.png")));
+		btnXoa1.setIcon(new ImageIcon(getClass().getResource("/IMG/xoa.png")));
+		btnSua1.setIcon(new ImageIcon(getClass().getResource("/IMG/sua.png")));
 
 		pnBtn.add(btnThem);
 		pnBtn.add(btnXoa);

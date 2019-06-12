@@ -25,27 +25,33 @@ import javax.swing.table.DefaultTableModel;
 
 
 
+
+
 import quanlynhahang.model.Ban;
+import quanlynhahang.model.KhachHang;
+import quanlynhahang.model.NhanVien;
 import quanlynhahang.model.SQLService;
 
 
 public class HoaDon extends JFrame {
-	JLabel lbl8, lblls, lblr, llblT, llblT2, llblT4, lblNV;
+	JLabel lbl8, lblls, lblr, llblT, llblT2, llblT4, lblNV,lblKH,lblT3;
 
 	DefaultTableModel dtm;
 	JTable tbl;
 	Connection conn;
 	JButton btn;
 	NhanVien nv;
+	KhachHang kh;
 	Ban ban;
-	String maBan,NgayH,maH,tenBan;
+	String maBan,NgayH,maH,tenBan,maKH;
+	JPanel pnKH; 
 	SimpleDateFormat spf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
-	public HoaDon(String title,Ban ba,String NgayH,String MaHd)
+	public HoaDon(String title,Ban ba,String NgayH,String MaHd,String maKH)
 	{
 		super(title);
 		this.ban =ba;
-		
+		this.maKH=maKH;
 		this.NgayH=NgayH;
 		this.maH=MaHd;
 		SQLService co = new SQLService();
@@ -84,15 +90,21 @@ public class HoaDon extends JFrame {
 				vec.add(result.getInt(2));
 				vec.add(result.getInt(3));
 			
-				vec.add(result.getInt(4));
+				vec.add(result.getString(4));
 			
 				lblNV.setText("thu ngân: "+result.getString(5));
 				dtm.addRow(vec);
 			
 				S=S+result.getInt(4);
 				i++;
-				T=(S*10)/100;
-				ST=S+T;
+				if(maKH.equals(null)==false)
+				{
+					pnKH.add(lblKH);
+					pnKH.add(lblT3);
+					pnKH.repaint();pnKH.revalidate();
+					T=(S*10)/100;	
+				}
+				ST=S-T;
 				
 			}	
 			llblT.setText(S.toString());
@@ -238,13 +250,14 @@ public class HoaDon extends JFrame {
 		pntong1.add(lblT1);
 		pntong1.add(lblT);
 
-		JPanel pntong2 = new JPanel();
-		pntong2.setLayout(new FlowLayout(FlowLayout.LEFT));
-		JLabel lblT2 = new JLabel("VAT(10%):");
-		JLabel lblT3 = new JLabel("");
+		pnKH = new JPanel();
+		pnKH.setLayout(new FlowLayout(FlowLayout.LEFT));
+		lblKH = new JLabel("Mã khách hàng(giảm 10%):");
+		lblT3 = new JLabel(maKH);
 		lblT3.setPreferredSize(new Dimension(20, 0));
-		pntong2.add(lblT3);
-		pntong2.add(lblT2);
+		//pnKH.add(lblKH);
+		//pnKH.add(lblT3);
+		
 
 		JPanel pntong3 = new JPanel();
 		pntong3.setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -254,7 +267,7 @@ public class HoaDon extends JFrame {
 		pntong3.add(lblT5);
 		pntong3.add(lblT4);
 		pnTong.add(pntong1);
-		pnTong.add(pntong2);
+		pnTong.add(pnKH);
 		pnTong.add(pntong3);
 		pnBottom1.add(pnTong, BorderLayout.WEST);
 

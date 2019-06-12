@@ -176,7 +176,7 @@ public class QuanLyChucVu extends JPanel{
 		setLayout(new GridLayout(1, 1));
 		JPanel pnTop = new JPanel();
 		pnTop.setLayout(new BorderLayout());
-		pnTop.setPreferredSize(new Dimension(0, 140));
+		pnTop.setPreferredSize(new Dimension(0, 100));
 		JPanel pnBottom = new JPanel();
 		pnBottom.setLayout(new BorderLayout());
 		pnBottom.setPreferredSize(new Dimension(0, 200));
@@ -188,7 +188,7 @@ public class QuanLyChucVu extends JPanel{
 		JPanel pnTieuDe = new JPanel();
 		pnTieuDe.setLayout(new FlowLayout());
 		JLabel lblTieuDe=new JLabel("Quản Lý Chức Vụ");
-		Font font = new Font("arial", Font.BOLD, 15);
+		Font font = new Font("arial", Font.BOLD, 25);
 		lblTieuDe.setFont(font);
 		lblTieuDe.setForeground(Color.BLUE);
 		pnTieuDe.add(lblTieuDe);
